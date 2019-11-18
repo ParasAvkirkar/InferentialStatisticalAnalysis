@@ -28,8 +28,29 @@ By now, we have just learned that some of the menus have
   To infer which menus have better or similar performance,
   we have to perform pairwise t-test
 "
-t_test_result = pairwise.t.test(first_set$time, first_set$menu)
-print(t_test_result)
+
+toolglass_users = subset(first_set, menu == "toolglass")
+flowmenu_users = subset(first_set, menu == "flowmenu")
+toolpalette_users = subset(first_set, menu == "toolpalette")
+controlmenu_users = subset(first_set, menu == "controlmenu")
+
+glass_vs_flow = t.test(toolglass_users$time, flowmenu_users$time, var.equal = TRUE)
+glass_vs_flow
+
+glass_vs_palette = t.test(toolglass_users$time, toolpalette_group$time, var.equal = TRUE)
+glass_vs_palette
+
+glass_vs_control = t.test(toolglass_users$time, controlmenu_users$time, var.equal = TRUE)
+glass_vs_control
+
+flow_vs_palette = t.test(flowmenu_users$time, toolpalette_users$time, var.equal = TRUE)
+flow_vs_palette
+
+flow_vs_control = t.test(flowmenu_users$time, controlmenu_users$time, var.equal = TRUE)
+flow_vs_control
+
+palette_vs_control = t.test(toolpalette_users$time, controlmenu_users$time, var.equal = TRUE)
+palette_vs_control
 
 "
   Our significance level is 0.05
@@ -44,8 +65,6 @@ print(t_test_result)
   
 "
 
-toolpalette_users = subset(first_set, menu == "toolpalette")
-controlmenu_users = subset(first_set, menu == "controlmenu")
 result = t.test(toolpalette_users$time, controlmenu_users$time, alternative = "greater")
 significance_level = 0.05
 if (result$p.value < significance_level) {
@@ -54,21 +73,31 @@ if (result$p.value < significance_level) {
   print("Controlmenu gives better performance")
 } else {
   print("Reject alternative hypothesis")
-  print()
+  print("Controlmenu gives inferior or similar performance")
 }
 
-### End of pairwise-t-test ###
+result = t.test(toolpalette_users$time, flowmenu_users$time, alternative = "greater")
+significance_level = 0.05
+if (result$p.value < significance_level) {
+  print("Reject Null Hypothesis")
+  print("Toolpalette menu needs more access time compared to flowmenu")
+  print("flowmenu gives better performance")
+} else {
+  print("Reject alternative hypothesis")
+  print("flowmenu gives inferior or similar performance")
+}
 
-# toolglass_users = subset(first_set, menu == "toolglass")
-# flowmenu_users = subset(first_set, menu == "flowmenu")
-# toolpalette_users = subset(first_set, menu == "toolpalette")
-# controlmenu_users = subset(first_set, menu == "controlmenu")
+result = t.test(toolpalette_users$time, toolglass_users$time, alternative = "greater")
+significance_level = 0.05
+if (result$p.value < significance_level) {
+  print("Reject Null Hypothesis")
+  print("Toolpalette menu needs more access time compared to toolglass")
+  print("toolglass gives better performance")
+} else {
+  print("Reject alternative hypothesis")
+  print("toolglass gives inferior or similar performance")
+}
 
-# View(controlmenu_users)
-# result = t.test(toolglass_users$time, flowmenu_users$time)
-# result = t.test(toolpalette_users$time, controlmenu_users$time, alternative = 'less')
-
-# names(result)
-# result[["conf.int"]]
-# View(result)
+### End of pairwise-t-test
+  
 
