@@ -28,6 +28,10 @@ By now, we have just learned that some of the menus have
   To infer which menus have better or similar performance,
   we have to perform pairwise t-test
 "
+all_pair_test = pairwise.t.test(first_set$time, first_set$menu)
+all_pair_test
+
+### Individual pairwise test ###
 
 toolglass_users = subset(first_set, menu == "toolglass")
 flowmenu_users = subset(first_set, menu == "flowmenu")
