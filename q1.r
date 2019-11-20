@@ -28,7 +28,7 @@ By now, we have just learned that some of the menus have
   To infer which menus have better or similar performance,
   we have to perform pairwise t-test
 "
-all_pair_test = pairwise.t.test(first_set$time, first_set$menu)
+all_pair_test = pairwise.t.test(first_set$time, first_set$menu, p.adjust.method = "bonferroni")
 all_pair_test
 
 ### Individual pairwise test ###
@@ -70,6 +70,7 @@ palette_vs_control
 "
 
 result = t.test(toolpalette_users$time, controlmenu_users$time, alternative = "greater")
+result
 significance_level = 0.05
 if (result$p.value < significance_level) {
   print("Reject Null Hypothesis")
@@ -78,17 +79,6 @@ if (result$p.value < significance_level) {
 } else {
   print("Reject alternative hypothesis")
   print("Controlmenu gives inferior or similar performance")
-}
-
-result = t.test(toolpalette_users$time, flowmenu_users$time, alternative = "greater")
-significance_level = 0.05
-if (result$p.value < significance_level) {
-  print("Reject Null Hypothesis")
-  print("Toolpalette menu needs more access time compared to flowmenu")
-  print("flowmenu gives better performance")
-} else {
-  print("Reject alternative hypothesis")
-  print("flowmenu gives inferior or similar performance")
 }
 
 result = t.test(toolpalette_users$time, toolglass_users$time, alternative = "greater")
