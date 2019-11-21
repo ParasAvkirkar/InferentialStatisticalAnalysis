@@ -1,4 +1,4 @@
-second_set = read.csv("~/workspace/Statistical Analysis/Statistical Analysis/dataset2.csv", quote="")
+second_set = read.csv("./dataset2.csv", quote="")
 
 ### Begin MANOVA test ###
 result = manova(cbind(time, error) ~ menu, data=second_set)
@@ -44,7 +44,11 @@ By now, we have just learned that some of the menus have
   To infer which menus have better or similar performance, in terms of error,
   we have to perform pairwise t-test
 "
-t_test_result = pairwise.t.test(second_set$error, second_set$menu, paired=TRUE)
+
+t_test_result = pairwise.t.test(second_set$time, second_set$menu, paired=TRUE, p.adjust.method = "bonferroni")
+print(t_test_result)
+
+t_test_result = pairwise.t.test(second_set$error, second_set$menu, paired=TRUE, p.adjust.method = "bonferroni")
 print(t_test_result)
 
 "

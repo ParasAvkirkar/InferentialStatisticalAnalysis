@@ -1,4 +1,4 @@
-first_set = read.csv("~/workspace/Statistical Analysis/Statistical Analysis/dataset1.csv", quote="")
+first_set = read.csv("./dataset1.csv", quote="")
 # View(first_set)
 
 ### Performing ANOVA test ###
