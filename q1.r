@@ -6,13 +6,13 @@ significance_level = 0.05
 result = aov(time ~ menu, data=first_set)
 summary(result)
 p_value = summary(result)[[1]]$Pr[[1]]
-cat("P-value for difference in variance of menu acces timings ", p_value, "\n")
+cat("P-value for difference in variance of menu usage timings ", p_value, "\n")
 if (p_value < significance_level) {
-  print("Null hypothesis is rejected")
-  print("Some of the menus's exhibit different access timings")
+  print("Null hypothesis: All menus are similar, is rejected")
+  print("Some of the menus's exhibit different usage timings")
 } else {
-  print("Alternative hypothesis is rejected")
-  print("Menus exhibit similar access timings")
+  print("Alternative hypothesis is rejected, all menus have similar usage timings")
+  print("Menus exhibit similar usage timings")
 }
 
 ### End ANOVA test ###

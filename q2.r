@@ -3,6 +3,7 @@ second_set = read.csv("~/workspace/Statistical Analysis/Statistical Analysis/dat
 ### Begin MANOVA test ###
 result = manova(cbind(time, error) ~ menu, data=second_set)
 result_summary = summary(result, test="Pillai")
+result_summary
 "
   Have explored all the test variations of manova: Pillai, Wilks, Hotelling-Lawley, Roy
   For all the test methods p_value was less than 0.05
